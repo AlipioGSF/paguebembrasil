@@ -1,0 +1,211 @@
+@import models.NavItem
+@import models.Plan
+@import models.Coffe
+@(title: String, navItems: List[NavItem], planList: List[Plan], coffeList: List[Coffe])
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@title</title>
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous' />
+
+  </head>
+<body class="inter pb-5">
+    <header class="container-sm d-flex justify-content-between align-items-center mt-2">
+      <div>
+        <a href="#home">
+          <img src="@routes.Assets.versioned("images/logo.svg")" alt="Hub Café Logo">
+        </a>
+      </div>
+      <div class="navbar">
+            <nav>
+                <ul class="inter-medium">
+                    @for(item <- navItems){
+                      <a href="#@item.getLink" class="fw-semibold text-decoration-none text-black">
+                        <li>
+                          @item.getName
+                        </li>
+                      </a>
+                    }
+                </ul>
+            </nav>
+      </div>
+    </header>
+
+    <section id="home" class="d-flex justify-content-center fs-6">
+      <div class="hero">
+        <h1 class="fw-semibold">ESPAÇO DE CO-WORKING PARA FREELANCERS,<br> EMPREENDEDORES E PEQUENAS EMPRESAS.</h1>
+        <div class="bg-black line"></div>
+      </div>
+    </section>
+
+    <section class="inspire container mx-auto">
+          <h2 class="fw-bolder fs-1">INSPIRE-SE ONDE VOCÊ TRABALHA</h2>
+          <p class="fst-italic fs-4">Aproveitando de um delicioso café</p>
+          <a href="#" class="align-self-center mx-auto button fw-bold my-2">CONHEÇA NOSSOS PLANOS</a>
+          <div class="d-flex gap-2">
+              <div class="imgBanner">
+                  <img class="imgBanner" src="@routes.Assets.versioned("images/cafe.jpg")" alt="Espaço café">
+                  <p>Espaço café</p>
+              </div>
+              <div class="imgBanner">
+                  <img  class="imgBanner" src="@routes.Assets.versioned("images/reuniao.jpg")" alt="Salas de reuniões">
+                  <p>Salas de reuniões</p>
+              </div>
+              <div class="imgBanner">
+                  <img  class="imgBanner" src="@routes.Assets.versioned("images/coworking.jpg")" alt="Open coworking">
+                  <p>Open coworking</p>
+              </div>
+          </div>
+    </section>
+
+    <section id="ohubcafe" class="container mt-5">
+      <div class="row justify-content-between align-items-center">
+        <h1 class="col-5 fw-bolder ">O HUB CAFÉ</h1>
+        <div class="col line bg-black"></div>
+      </div>
+      <div>
+        <p>O HUB CAFÉ é um espaço de trabalho vai além de mesas e cadeiras — é onde grandes ideias ganham vida. Criamos um ambiente receptivo, pensado para que os buscam produtividade, inspiração e uma comunidade colaborativa.</p>
+        <p>Oferecemos espaços variados para diferentes estilos de trabalho: desde áreas compartilhadas e dinâmicas para colaboração até salas privativas e silenciosas para foco total. Além disso, nossa área de café gourmet proporciona uma pausa perfeita, onde você pode recarregar as energias e se inspirar com bebidas e comidas de alta qualidade.</p>
+        <p>No HUB CAFÉ, você encontra o equilíbrio ideal entre trabalho, conforto e inovação. Seja para trocar ideias, fechar negócios ou simplesmente apreciar um bom café, estamos aqui para transformar o seu dia de trabalho em uma experiência única.</p>
+      </div>
+    </section>
+
+    <section id="espacos" class="container mt-5">
+      <div class="row justify-content-between align-items-center">
+        <h1 class="col-12 fw-bolder ">Espaços</h1>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <div>
+            <h1 class="fst-italic">Open coworking</h1>
+          </div>
+          <div>
+            <p>Nossa Área Compartilhada foi projetada para profissionais que valorizam a colaboração e o networking. Com um layout flexível e ambiente descontraído, este espaço é ideal para freelancers, startups e equipes que buscam uma atmosfera criativa e dinâmica.</p>
+            <p>Aqui, você pode se conectar com outros talentos, trocar ideias e explorar novas oportunidades enquanto trabalha em um ambiente moderno e totalmente equipado. Aproveite mesas amplas, cadeiras ergonômicas e um design pensado para promover tanto o foco quanto a interação.</p>
+            <p>No HUB CAFÉ, trabalhar em equipe nunca foi tão inspirador!</p>
+          </div>
+        </div>
+        <div class="col-4 h-25">
+          <img class="w-100" src="@routes.Assets.versioned("images/open.png")" alt="">
+        </div>
+      </div>
+      <div class="mt-4">
+        <div>
+          <h1 class="fst-italic">Salas privadas</h1>
+        </div>
+        <div class="row bg-black text-white align-items-center mt-4 rounded-2 px-4">
+          <div class="col-7">
+            <h2>Sala individual</h2>
+            <p>Para quem busca privacidade e concentração, nosso Espaço Privado Individual oferece o ambiente perfeito para trabalhar com foco total.</p>
+            <p>Ideal para profissionais que precisam de silêncio e conforto para realizar suas tarefas com mais eficiência, cada sala é equipada com uma estação de trabalho confortável, iluminação ajustável e total isolamento acústico.</p>
+            <p>No HUB CAFÉ, seu espaço de trabalho é tão único quanto você!</p>
+          </div>
+          <div class="col-4">
+            <img class="img" src="@routes.Assets.versioned("images/solo.png")" >
+          </div>
+          <div class="col-1">
+            <img class="img" src="@routes.Assets.versioned("images/iconWhite.svg")" >
+          </div>
+        </div>
+        <div class="row bg-black text-white align-items-center mt-4 rounded-2 px-4">
+          <div class="col-7">
+            <h2>Sala para equipe</h2>
+            <p>Um ambiente exclusivo para colaboração e criatividade.</p>
+            <p>Com capacidade para acomodar equipes de diferentes tamanhos, este espaço oferece o equilíbrio perfeito entre privacidade e interação. O ambiente foi projetado para garantir foco e produtividade sem abrir mão do conforto.</p>
+            <p>Perfeito para reuniões estratégicas, brainstorms ou desenvolvimento de projetos, aqui sua equipe pode inovar e crescer em um espaço que estimula a cooperação e o sucesso.</p>
+          </div>
+          <div class="col-4">
+            <img class="img" src="@routes.Assets.versioned("images/squad.png")" >
+          </div>
+          <div class="col-1">
+            <img class="img" src="@routes.Assets.versioned("images/iconWhite.svg")" >
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div>
+          <h1 class="fst-italic">Espaço café</h1>
+          <h5 class="text-sm">O Espaço de Café é mais do que uma pausa — é uma experiência!</h5>
+        </div>
+        <div class="mt-3">
+          <div class="row gap-3 align-items-center">
+            <img class="img col-auto" style="max-height: 20em;" src="@routes.Assets.versioned("images/coffe.png")" >
+            <div class="col-8 fw-semibold">
+              <p>Integrado ao ambiente de coworking, nosso café oferece uma seleção de bebidas e comidas de alta qualidade, perfeitas para recarregar as energias e inspirar novas ideias. Seja para um rápido espresso entre tarefas ou para uma conversa descontraída com colegas, nosso ambiente aconchegante é o lugar ideal para relaxar e socializar.</p>
+              <p>Além de ser um ponto de encontro para networking natural, o café proporciona um toque de sabor especial ao seu dia de trabalho, com opções que vão de cafés artesanais a deliciosos lanches gourmet.</p>
+              <p>No HUB CAFÉ, trabalhar e apreciar um bom café andam lado a lado!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="planos" class="container">
+      <div class="mt-4">
+        <div>
+          <h1 class="fw-semibold text-center">Planos</h1>
+        </div>
+        <div class="row gap-3 justify-content-center">
+          @for(item <- planList){
+            <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
+              <h4>
+                @item.getName
+              </h4>
+              <div>
+                <span>R$@item.getPrice</span>
+                <span>/dia</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+    
+    <section id="cafe" class="container mt-5">
+      <div>
+        <h1 class="fw-semibold text-center">Cafés</h1>
+      </div>
+      <div class="row gap-3 justify-content-center">
+        @for(item <- coffeList){
+          <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
+            <h4>
+              @item.getName
+            </h4>
+            <div>
+            <img class="img" src="@routes.Assets.versioned("images/" + item.getImage)" >
+              
+            </div>
+            <div class="mt-1">
+              <span class="fw-bold">R$@item.getPrice</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+    <section id="contato" class="mt-5 container">
+      <div>
+        <h1 class="fw-semibold text-center">Contato</h1>
+      </div>
+      <div>
+       <div class="bg-black p-4 rounded-3 text-white text-center">
+        <div>
+          <span>Email:</span>
+          <span>teste@@paguebembrasil.com</span>
+        </div>
+        <div>
+          <span>Telefone:</span>
+          <span>814002-8922</span>
+        </div>
+       </div>
+      </div>
+    </section>
+
+
+    <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@@5.3.3/dist/js/bootstrap.bundle.min.js' integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
