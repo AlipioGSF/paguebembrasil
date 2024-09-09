@@ -24,7 +24,7 @@
       </div>
       <div class="navbar">
             <nav>
-                <ul class="inter-medium">
+                <ul class="d-none d-md-flex inter-medium">
                     @for(item <- navItems){
                       <a href="#@item.getLink" class="fw-semibold text-decoration-none text-black">
                         <li>
@@ -33,6 +33,27 @@
                       </a>
                     }
                 </ul>
+                <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body border-0">
+                          <ul class="dropdown-menu border-0 w-100 d-grid">
+                            @for(item <- navItems){
+                              <a href="#@item.getLink" class="fw-semibold w-100 text-decoration-none text-black">
+                                <li>
+                                  @item.getName
+                                </li>
+                              </a>
+                            }
+                          </ul>
+                    </div>
+                  </div>
+                </div>
             </nav>
       </div>
 </header>
@@ -66,7 +87,7 @@
 
     <section id="ohubcafe" class="container mt-5">
       <div class="row justify-content-between align-items-center">
-        <h1 class="col-5 fw-bolder ">O HUB CAFÉ</h1>
+        <h1 class="col-6 col-sm-5 fw-bolder ">O HUB CAFÉ</h1>
         <div class="col line bg-black"></div>
       </div>
       <div>
@@ -220,8 +241,8 @@
       </div>
     </section>
 
-    <section class="container">
-      <canvas class="c" id="myChart" width="400" height="200"></canvas>
+    <section class="container mt-5">
+      <canvas class="mx-auto w-100" id="myChart"></canvas>
     </section>
 
     <section id="contato" class="mt-5 container">
@@ -245,33 +266,26 @@
  <script>
         var ctx = document.getElementById('myChart').getContext('2d');
 
-        // const coffeeList = Html(Json.toJson(coffeList).toString());
-
-        // // Calculando o total de faturamento
-        // const coffeeBilling = coffeeList.reduce((prev, curr) => {
-        //     return prev + 70 * curr.price;
-        // }, 0);
-
         var myChart = new Chart(ctx, {
-            type: 'bar', // Tipo de gráfico: 'bar', 'line', etc.
+            type: 'bar',
             data: {
                 labels: ['Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Total'],
                 datasets: [{
                     label: 'solo',
-                    data: [120, 190, 30, 50, 20, 30, 50],
+                    data: [2460, 2076, 1510, 1470, 1200, 1356, 10072],
                     backgroundColor: '#405ADB',
                     borderColor: '#405ADB',
                     borderWidth: 1
                 },
                 {
                     label: 'Squad',
-                    data: [102, 109, 120, 150, 200, 30, 112],
+                    data: [1068, 1464, 656, 1304, 2000, 1470, 7962],
                     backgroundColor: '#DB931F',
                     borderColor: '#DB931F',
                     borderWidth: 1
                 },{
                     label: 'café',
-                    data: [178, 19, 3, 5, 2, 3, 1],
+                    data: [2550, 2116, 1152, 960, 1480, 1080, 9338],
                     backgroundColor: '#5C4F3B',
                     borderColor: '#5C4F3B',
                     borderWidth: 1

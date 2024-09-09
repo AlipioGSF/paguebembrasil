@@ -24,7 +24,7 @@
       </div>
       <div class="navbar">
             <nav>
-                <ul class="inter-medium">
+                <ul class="d-none d-md-flex inter-medium">
                     @for(item <- navItems){
                       <a href="#@item.getLink" class="fw-semibold text-decoration-none text-black">
                         <li>
@@ -33,6 +33,27 @@
                       </a>
                     }
                 </ul>
+                <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body border-0">
+                          <ul class="dropdown-menu border-0 w-100 d-grid">
+                            @for(item <- navItems){
+                              <a href="#@item.getLink" class="fw-semibold w-100 text-decoration-none text-black">
+                                <li>
+                                  @item.getName
+                                </li>
+                              </a>
+                            }
+                          </ul>
+                    </div>
+                  </div>
+                </div>
             </nav>
       </div>
 </header>
@@ -66,7 +87,7 @@
 
     <section id="ohubcafe" class="container mt-5">
       <div class="row justify-content-between align-items-center">
-        <h1 class="col-5 fw-bolder ">O HUB CAFÉ</h1>
+        <h1 class="col-6 col-sm-5 fw-bolder ">O HUB CAFÉ</h1>
         <div class="col line bg-black"></div>
       </div>
       <div>
@@ -136,7 +157,7 @@
         <div class="mt-3">
           <div class="d-flex flex-wrap gap-3  align-items-center">
             <img class="img col-sm-3" style="max-height: 20em;" src="@routes.Assets.versioned("images/coffe.png")" >
-            <div class="col-12 text-sm-center fw-semibold col-sm-8 border">
+            <div class="col-12 px-4 px-sm-0 text-center text-sm-start fw-semibold col-sm-8">
               <p>Integrado ao ambiente de coworking, nosso café oferece uma seleção de bebidas e comidas de alta qualidade, perfeitas para recarregar as energias e inspirar novas ideias. Seja para um rápido espresso entre tarefas ou para uma conversa descontraída com colegas, nosso ambiente aconchegante é o lugar ideal para relaxar e socializar.</p>
               <p>Além de ser um ponto de encontro para networking natural, o café proporciona um toque de sabor especial ao seu dia de trabalho, com opções que vão de cafés artesanais a deliciosos lanches gourmet.</p>
               <p>No HUB CAFÉ, trabalhar e apreciar um bom café andam lado a lado!</p>
@@ -173,7 +194,7 @@
         <div class="row gap-3 justify-content-center">
           @for(item <- planSquadList){
             <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
-              <div class="mx-auto  w-50 d-flex justify-content-center p-0 text-center flex-wrap">
+              <div class="mx-auto gap-sm-2 w-50 d-flex justify-content-center p-0 text-center flex-wrap">
               	<p>
               	@item.getType
               	</p>
@@ -188,7 +209,9 @@
                 @item.getName
               </h4>
               <div>
-                <span>R$@item.getPrice/dia</span>
+                <span>R$@item.getPrice/dia
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M227.46 214c-16.52-28.56-43-48.06-73.68-55.09a68 68 0 1 0-51.56 0c-30.64 7-57.16 26.53-73.68 55.09a4 4 0 0 0 6.92 4C55 184.19 89.62 164 128 164s73 20.19 92.54 54a4 4 0 0 0 3.46 2a3.93 3.93 0 0 0 2-.54a4 4 0 0 0 1.46-5.46M68 96a60 60 0 1 1 60 60a60.07 60.07 0 0 1-60-60"/></svg>
+                </span>
               </div>
             </div>
           }
@@ -203,9 +226,9 @@
       <div class="row gap-3 justify-content-center">
         @for(item <- coffeList){
           <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
-            <h4>
+            <h6 class="fw-bold">
               @item.getName
-            </h4>
+            </h6>
             <div>
             <img class="img" src="@routes.Assets.versioned("images/" + item.getImage)" >
               
@@ -218,8 +241,8 @@
       </div>
     </section>
 
-    <section class="container">
-      <canvas class="c" id="myChart" width="400" height="200"></canvas>
+    <section class="container mt-5">
+      <canvas class="mx-auto w-100" id="myChart"></canvas>
     </section>
 
     <section id="contato" class="mt-5 container">
@@ -242,93 +265,45 @@
 
  <script>
         var ctx = document.getElementById('myChart').getContext('2d');
+
         var myChart = new Chart(ctx, {
-            type: 'bar', // Tipo de gráfico: 'bar', 'line', etc.
+            type: 'bar',
             data: {
                 labels: ['Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Total'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3, 1],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 159, 64, 0.2)'
-
-                    ],
+                    label: 'solo',
+                    data: [2460, 2076, 1510, 1470, 1200, 1356, 10072],
+                    backgroundColor: '#405ADB',
+                    borderColor: '#405ADB',
                     borderWidth: 1
                 },
                 {
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3, 1],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 159, 64, 0.2)'
-
-                    ],
+                    label: 'Squad',
+                    data: [1068, 1464, 656, 1304, 2000, 1470, 7962],
+                    backgroundColor: '#DB931F',
+                    borderColor: '#DB931F',
                     borderWidth: 1
                 },{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3, 1],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 159, 64, 0.2)'
-
-                    ],
+                    label: 'café',
+                    data: [2550, 2116, 1152, 960, 1480, 1080, 9338],
+                    backgroundColor: '#5C4F3B',
+                    borderColor: '#5C4F3B',
                     borderWidth: 1
                 },
                 
               ]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+                responsive:true,
+                plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Faturamento semestral'
+      }
+    }
             }
         });
     </script>
