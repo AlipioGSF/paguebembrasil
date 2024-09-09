@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import models.NavItem;
-import models.Plan;
+import models.PlanSolo;
+import models.PlanSquad;
 import models.Coffe;
-
 
 import play.mvc.*;
 
@@ -26,11 +26,17 @@ public class HomeController extends Controller {
             new NavItem("Contato", "contato")
         );
 
-        List<Plan> planList = Arrays.asList(
-            new Plan("Diário", 12 ),
-            new Plan("Semanal", 10 ),
-            new Plan("Mensal", 8 )
+        List<PlanSolo> planSoloList = Arrays.asList(
+            new PlanSolo("Diário", 15 ),
+            new PlanSolo("Semanal", 12 ),
+            new PlanSolo("Mensal", 10 )
         );
+        
+        List<PlanSquad> planSquadList = Arrays.asList(
+                new PlanSquad("Diário", 12 ),
+                new PlanSquad("Semanal", 10 ),
+                new PlanSquad("Mensal", 8 )
+            );
 
         List<Coffe> coffeList = Arrays.asList(
             new Coffe("Expresso", 8, "coffe1.jpg"),
@@ -39,7 +45,7 @@ public class HomeController extends Controller {
         );
 
 
-		return ok(views.html.index.render(title, navItems, planList, coffeList));
+		return ok(views.html.index.render(title, navItems, planSoloList, planSquadList, coffeList));
     }
 
 }

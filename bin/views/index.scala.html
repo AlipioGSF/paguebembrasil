@@ -1,5 +1,8 @@
 @import models.NavItem
-@(title: String, navItems: List[NavItem])
+@import models.Plan
+@import models.Coffe
+
+@(title: String, navItems: List[NavItem], planSoloList: List[PlanSolo], planSquadList: List[PlanSquad], coffeList: List[Coffe])
 
 <!DOCTYPE html>
 <html lang="pt">
@@ -9,12 +12,13 @@
     <title>@title</title>
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous' />
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-<body class="inter">
-    <header class="container-sm d-flex justify-content-between align-items-center mt-2">
+<body class="inter pb-5">
+
+	<header class="container-sm d-flex justify-content-between align-items-center mt-2">
       <div>
-        <a href="">
+        <a href="#home">
           <img src="@routes.Assets.versioned("images/logo.svg")" alt="Hub Café Logo">
         </a>
       </div>
@@ -31,9 +35,9 @@
                 </ul>
             </nav>
       </div>
-    </header>
-
-    <section class="d-flex justify-content-center fs-6">
+</header>
+		
+    <section id="home" class="d-flex justify-content-center fs-6">
       <div class="hero">
         <h1 class="fw-semibold">ESPAÇO DE CO-WORKING PARA FREELANCERS,<br> EMPREENDEDORES E PEQUENAS EMPRESAS.</h1>
         <div class="bg-black line"></div>
@@ -60,7 +64,7 @@
           </div>
     </section>
 
-    <section class="container mt-5">
+    <section id="ohubcafe" class="container mt-5">
       <div class="row justify-content-between align-items-center">
         <h1 class="col-5 fw-bolder ">O HUB CAFÉ</h1>
         <div class="col line bg-black"></div>
@@ -72,7 +76,7 @@
       </div>
     </section>
 
-    <section class="container mt-5">
+    <section id="espacos" class="container mt-5">
       <div class="row justify-content-between align-items-center">
         <h1 class="col-12 fw-bolder ">Espaços</h1>
       </div>
@@ -129,10 +133,10 @@
           <h1 class="fst-italic">Espaço café</h1>
           <h5 class="text-sm">O Espaço de Café é mais do que uma pausa — é uma experiência!</h5>
         </div>
-        <div>
-          <div class="row align-items-center">
-            <img class="img col-auto" style="max-height: 20em;" src="@routes.Assets.versioned("images/coffe.png")" >
-            <div class="col-6">
+        <div class="mt-3">
+          <div class="d-flex flex-wrap gap-3  align-items-center">
+            <img class="img col-sm-3" style="max-height: 20em;" src="@routes.Assets.versioned("images/coffe.png")" >
+            <div class="col-12 text-sm-center fw-semibold col-sm-8 border">
               <p>Integrado ao ambiente de coworking, nosso café oferece uma seleção de bebidas e comidas de alta qualidade, perfeitas para recarregar as energias e inspirar novas ideias. Seja para um rápido espresso entre tarefas ou para uma conversa descontraída com colegas, nosso ambiente aconchegante é o lugar ideal para relaxar e socializar.</p>
               <p>Além de ser um ponto de encontro para networking natural, o café proporciona um toque de sabor especial ao seu dia de trabalho, com opções que vão de cafés artesanais a deliciosos lanches gourmet.</p>
               <p>No HUB CAFÉ, trabalhar e apreciar um bom café andam lado a lado!</p>
@@ -141,13 +145,195 @@
         </div>
       </div>
     </section>
-    <footer>
-        <!-- Seção do rodapé, se necessário -->
-    </footer>
+    <section id="planos" class="container">
+      <div class="mt-4">
+        <div>
+          <h1 class="fw-semibold text-center">Planos</h1>
+        </div>
+        <div class="row gap-3 justify-content-center">
+          @for(item <- planSoloList){
+            <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
+              <h6>
+              	@item.getType
+              </h6>
+              <h4>
+                @item.getName
+              </h4>
+              <div>
+                <span>R$@item.getPrice/dia</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+    
+    <section id="planos" class="container">
+      <div class="mt-4">
+        <div class="row gap-3 justify-content-center">
+          @for(item <- planSquadList){
+            <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
+              <div class="mx-auto  w-50 d-flex justify-content-center p-0 text-center flex-wrap">
+              	<p>
+              	@item.getType
+              	</p>
+              	<p>
+              	<span class="d-flex align-items-center">
+                  <span>5+</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M227.46 214c-16.52-28.56-43-48.06-73.68-55.09a68 68 0 1 0-51.56 0c-30.64 7-57.16 26.53-73.68 55.09a4 4 0 0 0 6.92 4C55 184.19 89.62 164 128 164s73 20.19 92.54 54a4 4 0 0 0 3.46 2a3.93 3.93 0 0 0 2-.54a4 4 0 0 0 1.46-5.46M68 96a60 60 0 1 1 60 60a60.07 60.07 0 0 1-60-60"/></svg>
+              	</span>
+              	</p>
+              </div>
+              <h4>
+                @item.getName
+              </h4>
+              <div>
+                <span>R$@item.getPrice/dia</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+    
+    <section id="cafe" class="container mt-5">
+      <div>
+        <h1 class="fw-semibold text-center">Cafés</h1>
+      </div>
+      <div class="row gap-3 justify-content-center">
+        @for(item <- coffeList){
+          <div class="col-3 py-3 border border-2 shadow border-black rounded-3 text-center">
+            <h4>
+              @item.getName
+            </h4>
+            <div>
+            <img class="img" src="@routes.Assets.versioned("images/" + item.getImage)" >
+              
+            </div>
+            <div class="mt-1">
+              <span>R$@item.getPrice</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
 
+    <section class="container">
+      <canvas class="c" id="myChart" width="400" height="200"></canvas>
+    </section>
 
+    <section id="contato" class="mt-5 container">
+      <div>
+        <h1 class="fw-semibold text-center">Contato</h1>
+      </div>
+      <div>
+       <div class="bg-black p-4 rounded-3 text-white text-center">
+        <div>
+          <span>Email:</span>
+          <span>teste@@paguebembrasil.com</span>
+        </div>
+        <div>
+          <span>Telefone:</span>
+          <span>814002-8922</span>
+        </div>
+       </div>
+      </div>
+    </section>
+
+ <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico: 'bar', 'line', etc.
+            data: {
+                labels: ['Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Total'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3, 1],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 159, 64, 0.2)'
+
+                    ],
+                    borderWidth: 1
+                },
+                {
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3, 1],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 159, 64, 0.2)'
+
+                    ],
+                    borderWidth: 1
+                },{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3, 1],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 159, 64, 0.2)'
+
+                    ],
+                    borderWidth: 1
+                },
+                
+              ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
     <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@@5.3.3/dist/js/bootstrap.bundle.min.js' integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
